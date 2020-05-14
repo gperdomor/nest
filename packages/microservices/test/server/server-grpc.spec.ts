@@ -50,7 +50,7 @@ describe('ServerGrpc', () => {
     });
     it('should call "client.start"', async () => {
       const client = { start: sinon.spy() };
-      sinon.stub(server, 'createClient').callsFake(() => client);
+      sinon.stub(server, 'createClient').callsFake(async () => client);
 
       await server.listen(callback);
       expect(client.start.called).to.be.true;
@@ -78,7 +78,7 @@ describe('ServerGrpc', () => {
     });
     it('should call "client.start"', async () => {
       const client = { start: sinon.spy() };
-      sinon.stub(serverMulti, 'createClient').callsFake(() => client);
+      sinon.stub(serverMulti, 'createClient').callsFake(async () => client);
 
       await serverMulti.listen(callback);
       expect(client.start.called).to.be.true;
