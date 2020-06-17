@@ -41,11 +41,12 @@ describe('ServerGrpc', () => {
       callback = sinon.spy();
       bindEventsStub = sinon
         .stub(server, 'bindEvents')
-        .callsFake(() => ({} as any));
+        .callsFake(() => ({} as any)) as any;
     });
 
     it('should call "bindEvents"', async () => {
       await server.listen(callback);
+      server.close();
       expect(bindEventsStub.called).to.be.true;
     });
     it('should call "client.start"', async () => {
@@ -57,6 +58,7 @@ describe('ServerGrpc', () => {
     });
     it('should call callback', async () => {
       await server.listen(callback);
+      server.close();
       expect(callback.called).to.be.true;
     });
   });
@@ -69,22 +71,23 @@ describe('ServerGrpc', () => {
       callback = sinon.spy();
       bindEventsStub = sinon
         .stub(serverMulti, 'bindEvents')
-        .callsFake(() => ({} as any));
+        .callsFake(() => ({} as any)) as any;
     });
 
     it('should call "bindEvents"', async () => {
       await serverMulti.listen(callback);
+      serverMulti.close();
       expect(bindEventsStub.called).to.be.true;
     });
     it('should call "client.start"', async () => {
       const client = { start: sinon.spy() };
       sinon.stub(serverMulti, 'createClient').callsFake(async () => client);
-
       await serverMulti.listen(callback);
       expect(client.start.called).to.be.true;
     });
     it('should call callback', async () => {
       await serverMulti.listen(callback);
+      serverMulti.close();
       expect(callback.called).to.be.true;
     });
   });
