@@ -41,7 +41,7 @@ describe('ServerGrpc', () => {
       callback = sinon.spy();
       bindEventsStub = sinon
         .stub(server, 'bindEvents')
-        .callsFake(() => ({} as any)) as any;
+        .callsFake(() => ({} as any));
     });
 
     it('should call "bindEvents"', async () => {
@@ -71,7 +71,7 @@ describe('ServerGrpc', () => {
       callback = sinon.spy();
       bindEventsStub = sinon
         .stub(serverMulti, 'bindEvents')
-        .callsFake(() => ({} as any)) as any;
+        .callsFake(() => ({} as any));
     });
 
     it('should call "bindEvents"', async () => {
